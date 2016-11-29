@@ -10,6 +10,11 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    # if we use @comment = @article.comments.new here, it will create an extra "Comment by" line. The reason is @article.comments.new has added the new Comment to the in-memory collection for the Article
+    @comment = Comment.new
+    # @comment = @article.comments.new
+    # Due to the Rails’ mass-assignment protection, the article_id attribute of the new Comment object needs to be manually assigned with the id of the Article
+    @comment.article_id = @article.id
   end
 
   def new
@@ -18,6 +23,7 @@ class ArticlesController < ApplicationController
 
   def create
     # when you call a new article, you can pass it a hash of attributes
+    # article.params is like the short-hand for params hash for all attributes the article has
     @article = Article.new(article_params)
     # @article = Article.new(params[:article])
     # params can take a hash inside a hash
