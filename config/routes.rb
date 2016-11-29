@@ -7,4 +7,6 @@ Blogger::Application.routes.draw do
 
   # if we comment out this line, the Terminal will say: "You don't have any routes defined!""
   resources :articles
+  # this is to set the starter page at http://localhost:3000/
+  root to: 'articles#index'
 end
