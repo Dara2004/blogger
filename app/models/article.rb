@@ -4,6 +4,10 @@ class Article < ApplicationRecord
   has_many :taggings
   # an article has a list of tags through the ralationship of taggings.
   has_many :tags, through: :taggings
+  # This has_attached_file method is part of the paperclip library.
+  # As of version 4.0, all attachments are required to include a content_type validation, a file_name validation, or to explicitly state that they’re not going to have either. Paperclip raises MissingRequiredValidatorError error if you do not do this.
+  has_attached_file :image
+  validates_attachment_content_type :image, :content_type => ["image/ipg", "image/jpeg", "image/png"]
 
   def tag_list()
     # if we only do tags.join(", "), the array of tags will show sth like this: "#<Tag:0x007fe4d60c2430>, #<Tag:0x007fe4d617da50>", which is ugly, so we want to 1)convert all tag objects to an array of tag names, 2)join the arr of tag names together

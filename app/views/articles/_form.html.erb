@@ -1,5 +1,5 @@
 <!-- form_for is a Rail helper med which takes 1 parameters and a block of fields. The form is later on refered by name f -->
-<%= form_for(@article) do |f| %>
+<%= form_for(@article, html: {multipart: true}) do |f| %>
   <ul>
     <% @article.errors.full_messages.each do |error| %>
     <li><%= error  %></li>
@@ -20,7 +20,15 @@
     <%= f.label :tag_list %><br/>
     <%= f.text_field :tag_list %>
   </p>
-  
+
+  <p>
+    <% if @article.image.exists? %>
+        <%= image_tag @article.image.url %><br/>
+    <% end %>
+    <%= f.label :image, "Attach a New Image" %><br />
+    <%= f.file_field :image %>
+  </p>
+
   <p>
     <%= f.submit %>
   </p>

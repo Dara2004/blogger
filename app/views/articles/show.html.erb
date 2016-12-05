@@ -6,6 +6,15 @@
       <%= link_to tag.name, tag_path(tag) %>
     <% end %>
   </p>
+
+<!-- adding the image -->
+<p>
+  <% if @article.image.exists? %>
+      <%= image_tag @article.image.url %><br/>
+  <% end %>
+</p>
+
+<!--  body -->
 <p><%= @article.body %></p>
 <!-- articles_path: the route-helper which  -->
 
